@@ -1,6 +1,6 @@
 builders:
   skeleton_fake:
-    import: "package:skeleton_faker/builder.dart"
+    import: "package:skeleton_faker_generator/builder.dart"
     builder_factories: ["skeletonFakeBuilder"]
     build_extensions: {".dart": [".skeleton_fake.g.part"]}
     auto_apply: dependents
@@ -10,5 +10,5 @@ builders:
 targets:
   $default:
     builders:
-      skeleton_faker:skeleton_fake:
+      skeleton_faker_generator:skeleton_fake:
         generate_for: ["test/**"]

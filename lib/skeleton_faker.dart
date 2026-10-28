@@ -10,6 +10,25 @@ class Fake {
 
   final Random _r;
 
+  static final _factories = <Type, Object Function(Fake f)>{};
+
+  /// Teaches the generator a type it cannot build itself (functions,
+  /// third-party classes, interfaces with no concrete subclass...).
+  static void register<T extends Object>(T Function(Fake f) build) =>
+      _factories[T] = build;
+
+  /// A registered [T]; generated code calls this for unknown types.
+  T get<T>() {
+    final build = _factories[T];
+    if (build == null) {
+      throw StateError(
+        'skeleton_faker: no fake for $T. Call Fake.register<$T>((f) => ...) '
+        'before building skeletons, or make the field nullable.',
+      );
+    }
+    return build(this) as T;
+  }
+
   static const _word = 'Lorem';
 
   /// Text of [words] words; the length is what shapes the skeleton bone.
@@ -33,6 +52,8 @@ class Fake {
       min + _r.nextDouble() * (max - min);
   bool get boolean => _r.nextBool();
   DateTime get date => DateTime(2000);
+  Duration get duration => const Duration(minutes: 30);
+  Uri get uri => Uri.parse(image());
 
   T pick<T>(List<T> values) => values[_r.nextInt(values.length)];
 
@@ -52,7 +73,9 @@ List<T> fakeList<T>(int count, T Function(Fake f) build, {int seed = 0}) =>
 /// One placeholder model built by [build].
 T fakeOne<T>(T Function(Fake f) build, {int seed = 0}) => build(Fake(seed));
 
-/// Generates `$fake<ClassName>(Fake f)` from the class's unnamed constructor.
+/// Generates `$fake<ClassName>(Fake f)` from the class's constructor.
+///
+/// Needs `skeleton_faker_generator` and `build_runner` in dev_dependencies.
 ///
 /// ```dart
 /// part 'airline.g.dart';

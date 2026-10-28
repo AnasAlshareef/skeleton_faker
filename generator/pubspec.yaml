@@ -1,0 +1,25 @@
+name: skeleton_faker_generator
+description: build_runner generator for skeleton_faker's @skeletonFake.
+version: 2.0.0
+publish_to: none
+repository: https://github.com/AnasAlshareef/skeleton_faker
+
+environment:
+  sdk: ^3.5.0
+
+dependencies:
+  analyzer: ">=8.0.0 <15.0.0" # tested 8.1.1 and 14.5.0
+  build: ">=3.0.0 <6.0.0"
+  source_gen: ">=4.0.0 <5.0.0"
+  skeleton_faker:
+    git: https://github.com/AnasAlshareef/skeleton_faker.git
+
+dev_dependencies:
+  build_runner: ^2.4.0
+  lints: ^6.0.0
+  test: ^1.25.6
+
+# Local development uses the sibling runtime package.
+dependency_overrides:
+  skeleton_faker:
+    path: ..

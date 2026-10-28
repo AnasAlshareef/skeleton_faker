@@ -1,20 +1,12 @@
 name: skeleton_faker
 description: Placeholder model instances for skeleton loading effects like Skeletonizer.
-version: 1.1.0
-# repository: https://github.com/my_org/my_repo
+version: 2.0.0
+publish_to: none
+repository: https://github.com/AnasAlshareef/skeleton_faker
 
 environment:
-  sdk: ^3.12.1
-
-# Add regular dependencies here.
-dependencies:
-  analyzer: ^14.5.0
-  build: ^5.0.0
-  source_gen: ^4.3.1
-  # path: ^1.9.0
+  sdk: ^3.5.0
 
 dev_dependencies:
-  build_runner: ^2.17.1
-  build_test: ^3.5.23
   lints: ^6.0.0
   test: ^1.25.6
