@@ -51,3 +51,19 @@ List<T> fakeList<T>(int count, T Function(Fake f) build, {int seed = 0}) =>
 
 /// One placeholder model built by [build].
 T fakeOne<T>(T Function(Fake f) build, {int seed = 0}) => build(Fake(seed));
+
+/// Generates `$fake<ClassName>(Fake f)` from the class's unnamed constructor.
+///
+/// ```dart
+/// part 'airline.g.dart';
+///
+/// @skeletonFake
+/// class Airline { ... }
+///
+/// final loading = fakeList(6, $fakeAirline);
+/// ```
+class SkeletonFake {
+  const SkeletonFake();
+}
+
+const skeletonFake = SkeletonFake();
